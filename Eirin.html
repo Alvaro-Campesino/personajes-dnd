@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Ficha D&D 5e — Changeling Hechicero de Magia Salvaje</title>
+<style>
+  @page { size: A4; margin: 12mm; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 10.5pt;
+    color: #1a1a1a;
+    background: #fff;
+    margin: 0;
+    padding: 0;
+  }
+  .sheet {
+    max-width: 190mm;
+    margin: 0 auto;
+    padding: 4mm;
+  }
+  h1 {
+    font-size: 16pt;
+    text-align: center;
+    margin: 0 0 2mm 0;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #333;
+    padding-bottom: 1.5mm;
+  }
+  h2 {
+    font-size: 11pt;
+    margin: 4mm 0 1.5mm 0;
+    padding: 1mm 2mm;
+    background: #333;
+    color: #fff;
+    letter-spacing: 0.5px;
+  }
+  h3 {
+    font-size: 10pt;
+    margin: 3mm 0 1mm 0;
+    border-bottom: 1px solid #999;
+    padding-bottom: 0.5mm;
+  }
+  .cols {
+    display: flex;
+    gap: 5mm;
+    align-items: flex-start;
+  }
+  .col { flex: 1; min-width: 0; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1mm 0 2mm 0;
+    font-size: 9.5pt;
+  }
+  th, td {
+    border: 1px solid #888;
+    padding: 1mm 1.5mm;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background: #eee;
+    font-weight: bold;
+  }
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1.5mm;
+    margin: 2mm 0;
+  }
+  .stat {
+    border: 1.5px solid #333;
+    border-radius: 2mm;
+    text-align: center;
+    padding: 1mm 0;
+  }
+  .stat .label {
+    font-size: 7.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    background: #333;
+    color: #fff;
+    margin: -1mm -0.2mm 1mm -0.2mm;
+    padding: 0.8mm 0;
+    border-radius: 1.5mm 1.5mm 0 0;
+  }
+  .stat .value {
+    font-size: 14pt;
+    font-weight: bold;
+    line-height: 1.1;
+  }
+  .stat .mod {
+    font-size: 9pt;
+    color: #555;
+  }
+  ul { margin: 1mm 0 2mm 0; padding-left: 5mm; }
+  li { margin-bottom: 0.8mm; }
+  .box {
+    border: 1px solid #888;
+    padding: 2mm;
+    margin: 1.5mm 0;
+    background: #fafafa;
+  }
+  .small { font-size: 8.5pt; color: #444; }
+  .tag {
+    display: inline-block;
+    background: #333;
+    color: #fff;
+    font-size: 7.5pt;
+    padding: 0.3mm 1.5mm;
+    border-radius: 1mm;
+    margin-right: 1mm;
+  }
+  .footer {
+    text-align: center;
+    font-size: 7.5pt;
+    color: #777;
+    margin-top: 4mm;
+    border-top: 1px solid #ccc;
+    padding-top: 1.5mm;
+  }
+  @media print {
+    body { font-size: 10pt; }
+    .sheet { padding: 0; }
+    h2 { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .stat .label { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <h1>Changeling — Hechicero de Magia Salvaje</h1>
+  <p style="text-align:center; margin:0 0 2mm 0; font-size:9.5pt; font-style:italic;">
+    “Llevo el rostro de alguien que ya no existe. La magia que me liberó aún no ha terminado conmigo.”
+  </p>
+
+  <!-- STATS -->
+  <div class="stat-grid">
+    <div class="stat"><div class="label">Fuerza</div><div class="value">8</div><div class="mod">−1</div></div>
+    <div class="stat"><div class="label">Destreza</div><div class="value">15</div><div class="mod">+2</div></div>
+    <div class="stat"><div class="label">Constitución</div><div class="value">13</div><div class="mod">+1</div></div>
+    <div class="stat"><div class="label">Inteligencia</div><div class="value">10</div><div class="mod">+0</div></div>
+    <div class="stat"><div class="label">Sabiduría</div><div class="value">12</div><div class="mod">+1</div></div>
+    <div class="stat"><div class="label">Carisma</div><div class="value">17</div><div class="mod">+3</div></div>
+  </div>
+
+  <div class="cols">
+    <!-- LEFT COLUMN -->
+    <div class="col">
+
+      <h2>Identidad</h2>
+      <table>
+        <tr><th style="width:35%">Nombre</th><td>Sin nombre verdadero (usa el rostro prestado)</td></tr>
+        <tr><th>Raza</th><td>Cambiante (Changeling), feérico, Mediano, 30 pies</td></tr>
+        <tr><th>Clase</th><td>Hechicero (Magia Salvaje) — Nivel 1</td></tr>
+        <tr><th>Trasfondo</th><td>Criminal</td></tr>
+        <tr><th>Alineamiento</th><td>Caótico Neutral</td></tr>
+        <tr><th>Idiomas</th><td>Común + 1 adicional (sugerencia: Silvano o Infernal)</td></tr>
+      </table>
+
+      <h2>Combate</h2>
+      <table>
+        <tr><th>CA</th><td>13 (14 con armadura de cuero)</td></tr>
+        <tr><th>Iniciativa</th><td>+2</td></tr>
+        <tr><th>PG</th><td>7 (1d6 + 1)</td></tr>
+        <tr><th>Dado de Golpe</th><td>1d6</td></tr>
+        <tr><th>Velocidad</th><td>30 pies</td></tr>
+        <tr><th>Percepción pasiva</th><td>11</td></tr>
+        <tr><th>Salvaciones</th><td>Constitución, Carisma</td></tr>
+      </table>
+
+      <h3>Ataques</h3>
+      <table>
+        <tr><th>Ataque</th><th>Bonif.</th><th>Daño</th></tr>
+        <tr><td>Daga</td><td>+4</td><td>1d4+2 perforante</td></tr>
+        <tr><td>Descarga de fuego</td><td>+5</td><td>1d10 fuego (120 pies)</td></tr>
+        <tr><td>Rayo de escarcha</td><td>+5</td><td>1d8 frío (60 pies, −10 pies vel.)</td></tr>
+      </table>
+
+      <h2>Habilidades y Competencias</h2>
+      <table>
+        <tr><th>Habilidad</th><th>Bonif.</th></tr>
+        <tr><td>Engaño</td><td>+5</td></tr>
+        <tr><td>Perspicacia</td><td>+3</td></tr>
+        <tr><td>Sigilo</td><td>+4</td></tr>
+        <tr><td>Juego de Manos</td><td>+4</td></tr>
+      </table>
+      <p class="small"><strong>Herramientas:</strong> Herramientas de ladrón (+4), un juego de azar (+4).</p>
+
+      <h2>Rasgos de Raza</h2>
+      <ul class="small">
+        <li><strong>Cambiaformas:</strong> Acción para cambiar apariencia y voz. No puede duplicar a alguien que no haya visto. La ropa y el equipo no cambian.</li>
+        <li><strong>Instintos de cambiante:</strong> Competencia en Engaño y Perspicacia.</li>
+        <li><strong>Tipo de criatura:</strong> Feérico.</li>
+      </ul>
+
+      <h2>Trasfondo: Criminal</h2>
+      <ul class="small">
+        <li><strong>Competencias:</strong> Engaño, Sigilo, herramientas de ladrón, un juego de azar.</li>
+        <li><strong>Contacto criminal:</strong> Un contacto confiable en el bajo mundo que proporciona información, acceso o favores menores a cambio de un precio.</li>
+      </ul>
+
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div class="col">
+
+      <h2>Conjuros (Hechicero)</h2>
+      <table>
+        <tr><th>Aptitud mágica</th><td>Carisma</td></tr>
+        <tr><th>CD de salvación</th><td>13</td></tr>
+        <tr><th>Bonif. de ataque</th><td>+5</td></tr>
+        <tr><th>Espacios nivel 1</th><td>2</td></tr>
+      </table>
+
+      <h3>Trucos (4)</h3>
+      <ul class="small">
+        <li><strong>Descarga de fuego:</strong> ataque a distancia, 1d10 fuego.</li>
+        <li><strong>Ilusión menor:</strong> disfraces, distracciones, infiltración.</li>
+        <li><strong>Prestidigitación:</strong> manipulación, robos menores, utilidad.</li>
+        <li><strong>Mensaje:</strong> comunicación sigilosa a distancia.</li>
+      </ul>
+
+      <h3>Conjuros de nivel 1 (2)</h3>
+      <ul class="small">
+        <li><strong>Disfrazarse:</strong> infiltración perfecta combinada con el cambio de forma racial.</li>
+        <li><strong>Escudo:</strong> reacción, +5 CA hasta el inicio de tu siguiente turno.</li>
+      </ul>
+
+      <h2>Magia Salvaje</h2>
+      <div class="box small">
+        <p><strong>Oleada de magia salvaje:</strong> tras lanzar un conjuro de hechicero de nivel 1 o superior, el DM puede pedir una tirada de 1d20. Con un <strong>1</strong>, se tira en la tabla de Oleada de Magia Salvaje.</p>
+        <p><strong>Marea de caos:</strong> una vez por descanso largo, ventaja en una tirada de ataque, prueba de característica o tirada de salvación. El DM puede pedir una tirada en la tabla de Oleada después de usarla (recuperando su uso).</p>
+        <p class="small"><em>Interpretación:</em> cada Oleada es un eco de la explosión que te teletransportó al salir del ámbar. Un fragmento de Fop aún reside en ti.</p>
+      </div>
+
+      <h2>Equipo</h2>
+      <ul class="small">
+        <li>Daga (1d4 perforante)</li>
+        <li>Ropa de viaje en capas (para adaptarse a distintos rostros)</li>
+        <li>Herramientas de ladrón (ganzúas, alambre, limas)</li>
+        <li>Símbolo sagrado del dios de la justicia (guardado, no exhibido)</li>
+        <li>Kit de sanación (vendas, hierbas, agujas)</li>
+        <li>Diario con notas fragmentadas sobre el Templo del Ámbar</li>
+        <li>Bolsa con 15 po</li>
+      </ul>
+
+      <h2>Personalidad</h2>
+      <table>
+        <tr><th>Personalidad</th><td>Cambio de rostro sin pensar, como quien respira. A veces adopto la expresión de alguien que ya no existe y me quedo en blanco a mitad de frase.</td></tr>
+        <tr><th>Ideal</th><td><strong>Redención.</strong> Todos merecen una segunda oportunidad. He vivido las últimas voluntades de decenas de moribundos; nadie quiere morir sin paz.</td></tr>
+        <tr><th>Vínculo</th><td>El rostro que llevo puesto pertenece a alguien cuyos últimos deseos prometí cumplir. No recuerdo qué eran, pero le debo esa verdad.</td></tr>
+        <tr><th>Defecto</th><td>Las memorias fragmentadas me hacen desconfiar de mi propio juicio. A veces actúo como si fuera otra persona, y no sé si soy yo quien decide.</td></tr>
+      </table>
+
+    </div>
+  </div>
+
+  <h2>Apariencia</h2>
+  <p class="small">
+    La forma actual es la de una persona de mediana edad, rostro cansado pero amable, manos de enfermero. Cuando la magia salvaje se agita, su rostro parpadea: por un instante se ve la palidez sin rasgos del cambiante debajo, como una imagen que no termina de fijarse.
+    <br><strong>Forma natural:</strong> piel pálida, rasgos suaves y casi indefinidos, ojos negros sin pupila. La evita: le recuerda que no sabe quién es.
+  </p>
+
+  <h2>Ganchos de Trama</h2>
+  <ul class="small">
+    <li><strong>El rostro prestado:</strong> alguien reconocerá el rostro que lleva y esperará a la persona que era antes. ¿Qué hará?</li>
+    <li><strong>La magia de Fop:</strong> la explosión que lo liberó dejó una marca. ¿Puede controlarla o lo consumirá?</li>
+    <li><strong>El Templo del Ámbar:</strong> la misión olvidada sigue ahí. Las Oleadas pueden revelar fragmentos de memoria: una puerta, una voz, un objeto.</li>
+    <li><strong>El dios de la justicia:</strong> ¿sigue escuchando? Un clérigo o paladín del mismo dios podría reconocer su símbolo sagrado y confrontarlo.</li>
+    <li><strong>El contacto criminal:</strong> puede ser alguien que lo conoció como “el justiciero de los rostros”. ¿Lo chantajeará?</li>
+  </ul>
+
+  <div class="footer">
+    D&amp;D 5e — Ficha de personaje · Changeling Hechicero de Magia Salvaje · Nivel 1
+  </div>
+
+</div>
+</body>
+</html>
