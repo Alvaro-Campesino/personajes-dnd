@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Eirin — Changeling Hechicero de Magia Salvaje</title>
+<style>
+  @page { size: A4; margin: 10mm; }
+  * { box-sizing: border-box; }
+  :root {
+    --ink: #2b1d0e;
+    --parchment: #f4e9d0;
+    --parchment-dark: #e8d9b5;
+    --amber: #b8860b;
+    --amber-light: #d4a017;
+    --fey: #5b2a86;
+    --fey-light: #8e44ad;
+    --blood: #7b1e1e;
+  }
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 10pt;
+    color: var(--ink);
+    background: #1a1208;
+    margin: 0;
+    padding: 0;
+  }
+  .sheet {
+    max-width: 195mm;
+    margin: 6mm auto;
+    padding: 6mm;
+    background: var(--parchment);
+    border: 2px solid var(--amber);
+    box-shadow: 0 0 0 1px var(--fey), 0 0 18px rgba(91,42,134,0.5);
+    position: relative;
+    overflow: hidden;
+  }
+  /* Textura sutil de pergamino */
+  .sheet::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 10%, rgba(184,134,11,0.08), transparent 40%),
+      radial-gradient(circle at 80% 90%, rgba(91,42,134,0.08), transparent 40%),
+      repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(43,29,14,0.015) 3px, rgba(43,29,14,0.015) 4px);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .sheet > * { position: relative; z-index: 1; }
+
+  /* Cabecera */
+  .header {
+    text-align: center;
+    border-bottom: 3px double var(--amber);
+    padding-bottom: 2mm;
+    margin-bottom: 3mm;
+  }
+  .header h1 {
+    font-size: 19pt;
+    margin: 0;
+    color: var(--fey);
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 0 var(--amber-light);
+  }
+  .header .subtitle {
+    font-size: 9pt;
+    font-style: italic;
+    color: var(--ink);
+    margin-top: 1mm;
+  }
+  .header .flavor {
+    font-size: 8.5pt;
+    font-style: italic;
+    color: var(--blood);
+    margin-top: 1.5mm;
+  }
+
+  /* Rejilla de estadísticas */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 2mm;
+    margin: 3mm 0;
+  }
+  .stat {
+    border: 2px solid var(--fey);
+    border-radius: 3mm;
+    text-align: center;
+    background: var(--parchment-dark);
+    padding: 0 0 1mm 0;
+    box-shadow: inset 0 0 0 1px var(--amber-light);
+  }
+  .stat .label {
+    font-size: 7pt;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: var(--fey);
+    color: var(--parchment);
+    margin: 0 0 1mm 0;
+    padding: 0.8mm 0;
+    border-radius: 2mm 2mm 0 0;
+    font-weight: bold;
+  }
+  .stat .value {
+    font-size: 15pt;
+    font-weight: bold;
+    line-height: 1.1;
+    color: var(--ink);
+  }
+  .stat .mod {
+    font-size: 9pt;
+    color: var(--fey);
+    font-weight: bold;
+  }
+
+  /* Columnas */
+  .cols {
+    display: flex;
+    gap: 4mm;
+    align-items: flex-start;
+  }
+  .col { flex: 1; min-width: 0; }
+
+  /* Bloques estilo ficha oficial */
+  .block {
+    border: 1.5px solid var(--amber);
+    border-radius: 2mm;
+    margin: 0 0 3mm 0;
+    background: rgba(255,255,255,0.35);
+    overflow: hidden;
+  }
+  .block h2 {
+    font-size: 10pt;
+    margin: 0;
+    padding: 1.2mm 2mm;
+    background: linear-gradient(90deg, var(--fey), var(--fey-light));
+    color: var(--parchment);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-bottom: 1px solid var(--amber);
+  }
+  .block .content { padding: 2mm; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9pt;
+  }
+  th, td {
+    border-bottom: 1px solid rgba(184,134,11,0.4);
+    padding: 0.8mm 1.5mm;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background: rgba(184,134,11,0.15);
+    font-weight: bold;
+    color: var(--fey);
+  }
+  tr:last-child td { border-bottom: none; }
+
+  ul { margin: 0; padding-left: 4.5mm; }
+  li { margin-bottom: 0.7mm; }
+
+  .small { font-size: 8.3pt; color: #3a2a18; }
+  .center { text-align: center; }
+  .prof { color: var(--blood); font-weight: bold; }
+  .dim { color: #6b5a44; }
+
+  /* Habilidades en dos columnas internas */
+  .skills {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 3mm;
+    font-size: 8.6pt;
+  }
+  .skill-row {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dotted rgba(184,134,11,0.5);
+    padding: 0.4mm 0;
+  }
+  .skill-row .name { white-space: nowrap; }
+  .skill-row .bonus { font-weight: bold; color: var(--fey); }
+
+  /* Ataques */
+  .attack-row {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dotted rgba(184,134,11,0.5);
+    padding: 0.6mm 0;
+    font-size: 9pt;
+  }
+  .attack-row:last-child { border-bottom: none; }
+
+  /* Caja de magia salvaje con brillo feérico */
+  .wild {
+    border: 2px dashed var(--fey);
+    background: rgba(91,42,134,0.07);
+    border-radius: 2mm;
+    padding: 2mm;
+    margin-top: 1mm;
+    position: relative;
+  }
+  .wild h3 {
+    margin: 0 0 1mm 0;
+    font-size: 9.5pt;
+    color: var(--fey);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .footer {
+    text-align: center;
+    font-size: 7.5pt;
+    color: var(--fey);
+    margin-top: 4mm;
+    border-top: 2px double var(--amber);
+    padding-top: 1.5mm;
+    font-style: italic;
+  }
+
+  /* Animación de magia salvaje (solo pantalla) */
+  @keyframes feyGlow {
+    0%, 100% { box-shadow: 0 0 0 1px var(--fey), 0 0 18px rgba(91,42,134,0.5); }
+    50% { box-shadow: 0 0 0 1px var(--amber-light), 0 0 26px rgba(142,68,173,0.8); }
+  }
+  @media screen {
+    .sheet { animation: feyGlow 6s ease-in-out infinite; }
+  }
+  @media print {
+    body { background: #fff; }
+    .sheet {
+      box-shadow: none;
+      border: 1.5px solid var(--amber);
+      margin: 0;
+      max-width: 100%;
+      background: #fff;
+    }
+    .sheet::before { display: none; }
+    .block h2 {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .stat .label {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .prof { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <!-- CABECERA -->
+  <div class="header">
+    <h1>Eirin</h1>
+    <div class="subtitle">Changeling · Hechicero de Magia Salvaje · Nivel 1 · Caótico Neutral</div>
+    <div class="flavor">“Llevo el rostro de alguien que ya no existe. La magia que me liberó aún no ha terminado conmigo.”</div>
+  </div>
+
+  <!-- ESTADÍSTICAS -->
+  <div class="stat-grid">
+    <div class="stat"><div class="label">Fuerza</div><div class="value">8</div><div class="mod">−1</div></div>
+    <div class="stat"><div class="label">Destreza</div><div class="value">15</div><div class="mod">+2</div></div>
+    <div class="stat"><div class="label">Constitución</div><div class="value">13</div><div class="mod">+1</div></div>
+    <div class="stat"><div class="label">Inteligencia</div><div class="value">10</div><div class="mod">+0</div></div>
+    <div class="stat"><div class="label">Sabiduría</div><div class="value">12</div><div class="mod">+1</div></div>
+    <div class="stat"><div class="label">Carisma</div><div class="value">17</div><div class="mod">+3</div></div>
+  </div>
+
+  <div class="cols">
+    <!-- COLUMNA IZQUIERDA -->
+    <div class="col">
+
+      <div class="block">
+        <h2>Identidad</h2>
+        <div class="content">
+          <table>
+            <tr><th style="width:38%">Nombre</th><td>Eirin (rostro prestado; sin nombre verdadero)</td></tr>
+            <tr><th>Raza</th><td>Cambiante (feérico, Mediano, 30 pies)</td></tr>
+            <tr><th>Clase</th><td>Hechicero (Magia Salvaje) — Nivel 1</td></tr>
+            <tr><th>Trasfondo</th><td>Criminal</td></tr>
+            <tr><th>Alineamiento</th><td>Caótico Neutral</td></tr>
+            <tr><th>Idiomas</th><td>Común + 1 adicional (Silvano o Infernal)</td></tr>
+            <tr><th>Competencia</th><td>+2</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="block">
+        <h2>Combate</h2>
+        <div class="content">
+          <table>
+            <tr><th>CA</th><td>13 (14 con armadura de cuero)</td></tr>
+            <tr><th>Iniciativa</th><td>+2</td></tr>
+            <tr><th>PG</th><td>7 (1d6 + 1)</td></tr>
+            <tr><th>Dado de Golpe</th><td>1d6</td></tr>
+            <tr><th>Velocidad</th><td>30 pies</td></tr>
+            <tr><th>Percepción pasiva</th><td>11</td></tr>
+            <tr><th>Salvaciones</th><td>Constitución, Carisma</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="block">
+        <h2>Ataques</h2>
+        <div class="content">
+          <div class="attack-row"><span><strong>Daga</strong> (cuerpo a cuerpo)</span><span>+4 · 1d4+2 perf.</span></div>
+          <div class="attack-row"><span><strong>Descarga de fuego</strong> (120 pies)</span><span>+5 · 1d10 fuego</span></div>
+          <div class="attack-row"><span><strong>Rayo de escarcha</strong> (60 pies)</span><span>+5 · 1d8 frío</span></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h2>Habilidades</h2>
+        <div class="content">
+          <div class="skills">
+            <div class="skill-row"><span class="name dim">Acrobacias (Des)</span><span class="bonus">+2</span></div>
+            <div class="skill-row"><span class="name dim">Atletismo (Fue)</span><span class="bonus">−1</span></div>
+            <div class="skill-row"><span class="name dim">Arcanos (Int)</span><span class="bonus">+0</span></div>
+            <div class="skill-row"><span class="name prof">● Engaño (Car)</span><span class="bonus prof">+5</span></div>
+            <div class="skill-row"><span class="name dim">Historia (Int)</span><span class="bonus">+0</span></div>
+            <div class="skill-row"><span class="name dim">Interpretación (Car)</span><span class="bonus">+3</span></div>
+            <div class="skill-row"><span class="name dim">Intimidación (Car)</span><span class="bonus">+3</span></div>
+            <div class="skill-row"><span class="name dim">Investigación (Int)</span><span class="bonus">+0</span></div>
+            <div class="skill-row"><span class="name prof">● Juego de Manos (Des)</span><span class="bonus prof">+4</span></div>
+            <div class="skill-row"><span class="name dim">Medicina (Sab)</span><span class="bonus">+1</span></div>
+            <div class="skill-row"><span class="name dim">Naturaleza (Int)</span><span class="bonus">+0</span></div>
+            <div class="skill-row"><span class="name dim">Percepción (Sab)</span><span class="bonus">+1</span></div>
+            <div class="skill-row"><span class="name prof">● Perspicacia (Sab)</span><span class="bonus prof">+3</span></div>
+            <div class="skill-row"><span class="name dim">Persuasión (Car)</span><span class="bonus">+3</span></div>
+            <div class="skill-row"><span class="name dim">Religión (Int)</span><span class="bonus">+0</span></div>
+            <div class="skill-row"><span class="name prof">● Sigilo (Des)</span><span class="bonus prof">+4</span></div>
+            <div class="skill-row"><span class="name dim">Supervivencia (Sab)</span><span class="bonus">+1</span></div>
+            <div class="skill-row"><span class="name dim">Trato con Animales (Sab)</span><span class="bonus">+1</span></div>
+          </div>
+          <p class="small" style="margin-top:1.5mm;"><strong>Herramientas:</strong> Herramientas de ladrón (+4), un juego de azar (+4).</p>
+        </div>
+      </div>
+
+      <div class="block">
+        <h2>Rasgos de Raza y Trasfondo</h2>
+        <div class="content small">
+          <p><strong>Cambiaformas:</strong> Acción para cambiar apariencia y voz. No puede duplicar a alguien que no haya visto. La ropa y el equipo no cambian.</p>
+          <p><strong>Instintos de cambiante:</strong> Competencia en Engaño y Perspicacia.</p>
+          <p><strong>Tipo de criatura:</strong> Feérico.</p>
+          <p><strong>Contacto criminal:</strong> Un contacto confiable en el bajo mundo que proporciona información, acceso o favores menores a cambio de un precio.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- COLUMNA DERECHA -->
+    <div class="col">
+
+      <div class="block">
+        <h2>Conjuros (Hechicero)</h2>
+        <div class="content">
+          <table>
+            <tr><th>Aptitud mágica</th><td>Carisma</td></tr>
+            <tr><th>CD de salvación</th><td>13</td></tr>
+            <tr><th>Bonif. de ataque</th><td>+5</td></tr>
+            <tr><th>Espacios nivel 1</th><td>2</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="block">
+        <h2>Trucos (4)</h2>
+        <div class="content small">
+          <ul>
+            <li><strong>Descarga de fuego:</strong> ataque a distancia, 1d10 fuego.</li>
+            <li><strong>Ilusión menor:</strong> disfraces, distracciones, infiltración.</li>
+            <li><strong>Prestidigitación:</strong> manipulación, robos menores, utilidad.</li>
+            <li><strong>Mensaje:</strong> comunicación sigilosa a distancia.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="block">
+        <h2>Conjuros de Nivel 1 (2)</h2>
+        <div class="content small">
+          <ul>
+            <li><strong>Disfrazarse:</strong> infiltración perfecta combinada con el cambio de forma racial.</li>
+            <li><strong>Escudo:</strong> reacción, +5 CA hasta el inicio de tu siguiente turno.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="block">
+        <h2>Magia Salvaje</h2>
+        <div class="content">
+          <div class="wild">
+            <h3>Oleada de magia salvaje</h3>
+            <p class="small">Tras lanzar un conjuro de hechicero de nivel 1 o superior, el DM puede pedir una tirada de 1d20. Con un <strong>1</strong>, se tira en la tabla de Oleada de Magia Salvaje.</p>
+            <h3>Marea de caos</h3>
+            <p class="small">Una vez por descanso largo, ventaja en una tirada de ataque, prueba de característica o tirada de salvación. El DM puede pedir una tirada en la tabla de Oleada después de usarla (recuperando su uso).</p>
+            <p class="small"><em>Interpretación:</em> cada Oleada es un eco de la explosión que te teletransportó al salir del ámbar. Un fragmento de Fop aún reside en ti.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h2>Equipo</h2>
+        <div class="content small">
+          <ul>
+            <li>Daga (1d4 perforante)</li>
+            <li>Ropa de viaje en capas</li>
+            <li>Herramientas de ladrón</li>
+            <li>Símbolo sagrado del dios de la justicia (guardado)</li>
+            <li>Kit de sanación</li>
+            <li>Diario con notas sobre el Templo del Ámbar</li>
+            <li>Bolsa con 15 po</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PERSONALIDAD -->
+  <div class="block">
+    <h2>Personalidad</h2>
+    <div class="content">
+      <table>
+        <tr><th style="width:22%">Personalidad</th><td>Cambio de rostro sin pensar, como quien respira. A veces adopto la expresión de alguien que ya no existe y me quedo en blanco a mitad de frase.</td></tr>
+        <tr><th>Ideal</th><td><strong>Redención.</strong> Todos merecen una segunda oportunidad. He vivido las últimas voluntades de decenas de moribundos; nadie quiere morir sin paz.</td></tr>
+        <tr><th>Vínculo</th><td>El rostro que llevo puesto pertenece a alguien cuyos últimos deseos prometí cumplir. No recuerdo qué eran, pero le debo esa verdad.</td></tr>
+        <tr><th>Defecto</th><td>Las memorias fragmentadas me hacen desconfiar de mi propio juicio. A veces actúo como si fuera otra persona, y no sé si soy yo quien decide.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- APARIENCIA -->
+  <div class="block">
+    <h2>Apariencia</h2>
+    <div class="content small">
+      <p>La forma actual es la de una persona de mediana edad, rostro cansado pero amable, manos de enfermero. Cuando la magia salvaje se agita, su rostro parpadea: por un instante se ve la palidez sin rasgos del cambiante debajo, como una imagen que no termina de fijarse.</p>
+      <p><strong>Forma natural:</strong> piel pálida, rasgos suaves y casi indefinidos, ojos negros sin pupila. La evita: le recuerda que no sabe quién es.</p>
+    </div>
+  </div>
+
+  <!-- GANCHOS -->
+  <div class="block">
+    <h2>Ganchos de Trama</h2>
+    <div class="content small">
+      <ul>
+        <li><strong>El rostro prestado:</strong> alguien reconocerá el rostro que lleva y esperará a la persona que era antes. ¿Qué hará?</li>
+        <li><strong>La magia de Fop:</strong> la explosión que lo liberó dejó una marca. ¿Puede controlarla o lo consumirá?</li>
+        <li><strong>El Templo del Ámbar:</strong> la misión olvidada sigue ahí. Las Oleadas pueden revelar fragmentos de memoria.</li>
+        <li><strong>El dios de la justicia:</strong> un clérigo o paladín del mismo dios podría reconocer su símbolo sagrado y confrontarlo.</li>
+        <li><strong>El contacto criminal:</strong> puede ser alguien que lo conoció como “el justiciero de los rostros”. ¿Lo chantajeará?</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer">
+    D&amp;D 5e · Ficha de personaje · Eirin, Changeling Hechicero de Magia Salvaje · Nivel 1
+  </div>
+
+</div>
+</body>
+</html>
