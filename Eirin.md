@@ -24,7 +24,9 @@
 **Constitución +3** · **Carisma +5** · Fuerza −1 · Destreza +2 · Inteligencia +0 · Sabiduría +1
 
 ### Habilidades
-**Engaño +5** · **Juego de Manos +4** · **Perspicacia +3** · **Sigilo +4** · Acrobacias +2 · Atletismo −1 · Arcanos +0 · Historia +0 · Interpretación +3 · Intimidación +3 · Investigación +0 · Medicina +1 · Naturaleza +0 · Percepción +1 · Persuasión +3 · Religión +0 · Supervivencia +1 · Trato con Animales +1
+**Engaño +5** · **Persuasión +5** · **Juego de Manos +4** · **Sigilo +4** · **Perspicacia +3** · Acrobacias +2 · Atletismo −1 · Arcanos +0 · Historia +0 · Interpretación +3 · Intimidación +3 · Investigación +0 · Medicina +1 · Naturaleza +0 · Percepción +1 · Religión +0 · Supervivencia +1 · Trato con Animales +1
+
+*Proficiencias: racial (Engaño, Perspicacia) · trasfondo (Engaño, Sigilo) · clase (Juego de Manos, Persuasión).*
 
 ### Competencias
 Armas simples. **Herramientas de ladrón +4.** Un juego de azar +4.
